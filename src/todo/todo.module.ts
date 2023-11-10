@@ -1,16 +1,12 @@
 import { Module } from '@nestjs/common';
 import { TodoController } from './todo.controller';
 import { TodoService } from './todo.service';
-import { TodosController } from './todos.controller';
-
-export interface Todo {
-  id: string;
-  title: string;
-  description: string;
-}
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { Todo } from './todo.entity';
 
 @Module({
-  controllers: [TodoController, TodosController],
+  imports: [TypeOrmModule.forFeature([Todo])],
+  controllers: [TodoController],
   providers: [TodoService],
 })
 export class TodoModule {}
